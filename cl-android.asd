@@ -6,4 +6,5 @@
   :depends-on ("cffi")
   :components ((:file "packages")
                (:file "library")
-               (:file "api-levels")))
+               (:file "api-levels")
+               (:file "permissions")))
