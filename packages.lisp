@@ -1,12 +1,14 @@
 (defpackage #:cl-android/cffi
   (:use #:cl #:cffi)
   (:export #:libandroid
+           #:pid
+           #:getpid
+           #:uid
+           #:getuid
            #:get-application-target-api-level
            #:get-device-api-level
            #:check-permission-result
            #:check-permission-status
-           #:pid
-           #:uid
            #:check-permission))
 
 (defpackage #:cl-android
