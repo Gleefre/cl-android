@@ -22,7 +22,7 @@ Java API of Context::checkPermission() is usually faster and is preferred."
 (defun check-permission (permission &key (pid (android:getpid))
                                          (uid (android:getuid)))
   (with-foreign-object (result 'android:check-permission-result)
-    (let* ((permission (format nil "android.permission.~a" permission))
+    (let* ((permission (substitute #\_ #\- (format nil "android.permission.~a" permission)))
            (status (android:check-permission permission pid uid result))
            (result (mem-aref result 'android:check-permission-result)))
       (if (eq status :ok)
