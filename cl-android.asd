@@ -1,4 +1,4 @@
-(defsystem "android-log"
+(defsystem "cl-android"
   :description "CFFI bindings to libandroid library."
   :version "0.0.1"
   :author "Grolter <varedif.a.s@gmail.com>"
