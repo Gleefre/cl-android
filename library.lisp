@@ -6,7 +6,7 @@
 (in-package #:cl-android)
 
 (defun init ()
-  (load-foreign-library 'libandroid))
+  (load-foreign-library 'android:libandroid))
 
 (defun quit ()
-  (close-foreign-library 'libandroid))
+  (close-foreign-library 'android:libandroid))

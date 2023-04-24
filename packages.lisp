@@ -12,9 +12,12 @@
            #:check-permission))
 
 (defpackage #:cl-android
-  (:use #:cl #:cffi #:cl-android/cffi)
-  (:export #:libandroid
-           #:init
+  (:use #:cl #:cffi)
+  (:local-nicknames (#:android #:cl-android/cffi))
+  (:import-from #:cl-android/cffi
+                #:get-application-target-api-level
+                #:get-device-api-level)
+  (:export #:init
            #:quit
            #:get-application-target-api-level
            #:get-device-api-level))
