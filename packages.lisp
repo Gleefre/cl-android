@@ -20,4 +20,5 @@
   (:export #:init
            #:quit
            #:get-application-target-api-level
-           #:get-device-api-level))
+           #:get-device-api-level
+           #:check-permission))
