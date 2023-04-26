@@ -42,7 +42,7 @@
 
 (defmacro defun/ift ((type struct) name return-type (&rest args) &optional docstring)
   `(progn
-     (export ,name *package*)
+     (export ',name *package*)
      (defun ,name (,type ,@(generate-lambda-list args))
        ,docstring
        (with-foreign-objects (,@(generate-foreign-objects args))
@@ -64,7 +64,7 @@
   (let ((rest-args-name (cadar (last args)))
         (args (butlast args)))
     `(progn
-       (export ,name *package*)
+       (export ',name *package*)
        (defmacro ,name (,type ,@(generate-lambda-list args) &rest ,rest-args-name)
          ,docstring
          `(with-foreign-objects (,@',(generate-foreign-objects args))
