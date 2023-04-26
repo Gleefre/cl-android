@@ -1,23 +1,28 @@
 (in-package #:cl-android/jni)
 
-#+nil
-(defun get-default-java-vm-initargs (&optional (vm-version :version-1-6))
-  (with-foreign-object (ret-vm-initargs '(:struct java-vm-initargs))
-    (setf (foreign-slot-value ret-vm-initargs '(:struct java-vm-initargs) 'version)
+(defun get-default-vm-initargs (&optional (vm-version :v1.6))
+  (with-foreign-object (ret-vm-initargs '(:struct jll:vm-initargs))
+    (setf (foreign-slot-value ret-vm-initargs
+                              '(:struct jll:vm-initargs)
+                              'jll:version)
           vm-version)
-    (values (%get-default-java-vm-initargs ret-vm-initargs)
-            (mem-aref ret-vm-initargs '(:struct java-vm-initargs)))))
-
-(defun get-created-java-vms (&optional (buffer-length 1))
-  (with-foreign-objects ((return-vms '(:pointer jni:java-vm) buffer-length)
-                         (return-number '(:pointer jni:java-size)))
-    (let ((status (jni:get-created-java-vms return-vms buffer-length return-number)))
+    (let ((status (jll:get-default-vm-initargs ret-vm-initargs)))
       (values (when (eq status :ok)
-                (loop for i below (min buffer-length (mem-aref return-number 'jni:java-size))
-                      collect (mem-aref return-vms :pointer i)))
+                (mem-aref ret-vm-initargs '(:struct jll:vm-initargs)))
               status))))
 
-(defun destroy-java-vm (jvm)
+(defun get-created-vms (&optional (buffer-length 1))
+  (with-foreign-objects ((return-vms '(:pointer jll:vm) buffer-length)
+                         (return-number '(:pointer jll:size)))
+    (let ((status (jll:get-created-vms return-vms buffer-length return-number)))
+      (values (when (eq status :ok)
+                (loop for i below (min (mem-aref return-number 'jll:size)
+                                       buffer-length)
+                      collect (mem-aref return-vms 'jll:vm i)))
+              status))))
+
+#|
+(defun destroy-vm (vm)
   (foreign-funcall-pointer (foreign-slot-value (mem-aref jvm 'jni:java-vm)
                                                '(:struct jni:jni-invoke-interface)
                                                'jni:destroy-java-vm)
@@ -66,3 +71,64 @@
       (values (when (eq status :ok)
                 (mem-aref ret-environment 'jni:jni-environment))
               status))))
+
+(defun new-string-utf (java-environment string)
+  (foreign-funcall-pointer (foreign-slot-value (mem-aref java-environment 'jni:jni-environment)
+                                               '(:struct jni:jni-native-interface)
+                                               'jni:new-string-utf)
+                           ()
+                           jni:jni-environment java-environment
+                           :string string
+                           jni:java-string))
+
+(defun decode-string-utf (java-environment java-string)
+  (foreign-funcall-pointer (foreign-slot-value (mem-aref java-environment 'jni:jni-environment)
+                                               '(:struct jni:jni-native-interface)
+                                               'jni:get-string-utf-chars)
+                           ()
+                           jni:jni-environment java-environment
+                           jni:java-string java-string
+                           :pointer (null-pointer)
+                           :string))
+
+(defun java-find-class (java-environment class-name)
+  (foreign-funcall-pointer (foreign-slot-value (mem-aref java-environment 'jni:jni-environment)
+                                               '(:struct jni:jni-native-interface)
+                                               'jni:find-class)
+                           ()
+                           jni:jni-environment java-environment
+                           :string class-name
+                           jni:java-class))
+
+(defun get-static-field-id (environment class name signature)
+  (foreign-funcall-pointer (foreign-slot-value (mem-aref environment 'jni:jni-environment)
+                                               '(:struct jni:jni-native-interface)
+                                               'jni:get-static-field-id)
+                           ()
+                           jni:jni-environment environment
+                           jni:java-class class
+                           :string name
+                           :string signature
+                           jni:java-field-id))
+
+(defun get-static-object-field (environment class field)
+  (foreign-funcall-pointer (foreign-slot-value (mem-aref environment 'jni:jni-environment)
+                                               '(:struct jni:jni-native-interface)
+                                               'jni:get-static-object-field)
+                           ()
+                           jni:jni-environment environment
+                           jni:java-class class
+                           jni:java-field-id field
+                           jni:java-object))
+
+(defun get-method-id (environment class name signature)
+  (foreign-funcall-pointer (foreign-slot-value (mem-aref environment 'jni:jni-environment)
+                                               '(:struct jni:jni-native-interface)
+                                               'jni:get-method-id)
+                           ()
+                           jni:jni-environment environment
+                           jni:java-class class
+                           :string name
+                           :string signature
+                           jni:java-method-id))
+|#
