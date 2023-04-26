@@ -8,9 +8,6 @@
     (values (%get-default-java-vm-initargs ret-vm-initargs)
             (mem-aref ret-vm-initargs '(:struct java-vm-initargs)))))
 
-(defun init ()
-  (load-foreign-library 'jni:native-helper))
-
 (defun get-created-java-vms (&optional (buffer-length 1))
   (with-foreign-objects ((return-vms '(:pointer jni:java-vm) buffer-length)
                          (return-number '(:pointer jni:java-size)))
