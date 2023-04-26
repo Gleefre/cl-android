@@ -32,11 +32,22 @@
   (:import-from #:cl #:t #:&rest #:in-package)
   (:import-from #:cffi
                 #:defctype #:defcstruct #:defcenum
-                #:defcunion #:defcfun #:null-pointer))
+                #:defcunion #:defcfun #:null-pointer)
+  (:export #:boolean #:byte #:char #:short #:int #:long #:float #:double
+           #:size
+           #:object #:class #:string #:array
+           #:object-array #:boolean-array #:byte-array #:char-array #:short-array
+           #:int-array #:long-array #:float-array #:double-array
+           #:throwable #:weak
+           #:value
+           #:field-id #:method-id
+           #:reference-type #:version #:code #:mode
+           #:native-method #:vm-option #:vm-initargs #:vm-attach-args
+           #:get-default-vm-initargs #:create-vm #:get-created-vms))
 
 (defpackage #:cl-android/jni
   (:use #:cl #:cffi)
-  (:local-nicknames (#:jni #:cl-android/jni/cffi))
+  (:local-nicknames (#:jll #:cl-android/jni/cffi))  ; jll = jni low level
   (:export #:init
            #:get-created-java-vms
            #:destroy-java-vm
