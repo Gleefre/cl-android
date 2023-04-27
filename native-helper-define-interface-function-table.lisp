@@ -25,7 +25,7 @@
         collect `(,@prefix ,argname :pointer)
         when (and (listp type)
                   (eq (car type) :return))
-        collect `(,@prefix ,argname ,(cdr type))))
+        collect `(,@prefix ,argname ',(cadr type))))
 
 (defun generate-call-args (args &key quote-return)
   (loop for (type argname) in args
@@ -34,7 +34,7 @@
           collect (if quote-return `',argname argname)
         else if (and (listp type)
                      (eq (car type) :return))
-          collect (cdr type) and
+          collect :pointer and
           collect (if quote-return `',argname argname)
         else 
           collect type and
@@ -46,7 +46,7 @@
      (defun ,name (,type ,@(generate-lambda-list args))
        ,docstring
        (with-foreign-objects (,@(generate-foreign-objects args))
-         (values (foreign-funcall-pointer (foreign-slot-value (mem-aref ,type ,type)
+         (values (foreign-funcall-pointer (foreign-slot-value (mem-aref ,type ',type)
                                                               '(:struct ,struct)
                                                               ',name)
                                           ()
@@ -88,6 +88,6 @@
                          :pointer)))
      (defctype ,type-name (:pointer (:struct ,struct-name)))
      ,@(mapcar (lambda (slot)
-                 `(,(if (member '&rest slot) 'defmacro/ift 'defun/ift)
+                 `(,(if (member '&rest (third slot) :key #'car) 'defmacro/ift 'defun/ift)
                    (,type-name ,struct-name) ,@slot))
                (remove-if-not #'listp functors))))

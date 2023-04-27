@@ -125,8 +125,7 @@ Waits until the current thread is the only non-daemon user-level Java thread.")
   %reserved
 
   (get-version version ()
-    "Returns the version of the native method interface.")
-
+               "Returns the version of the native method interface.")
   (define-class class ((:string name) (object loader) ((:pointer byte) buffer) (size buffer-length))
     "Loads a class from a buffer of raw class data.")
   (find-class class ((:string name))
@@ -195,7 +194,7 @@ The class must not refer to an array class.")
     "Constructs a new Java object and invokes given constructor method.
 This ID must be obtained by calling get-method-id.")
   %new-object-v
-  (new-object-a object ((class class) (method-id method-id) ((:pointer value) args))
+  (new-object-a object ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Constructs a new Java object and invokes given constructor method.
 This ID must be obtained by calling get-method-id.")
 
@@ -212,103 +211,103 @@ Causes an uninitialized class to be initialized.")
   (call-object-method object ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-object-method-v
-  (call-object-method-a object ((object object) (method-id method-id) ((:pointer value) args))
+  (call-object-method-a object ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-boolean-method boolean ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-boolean-method-v
-  (call-boolean-method-a boolean ((object object) (method-id method-id) ((:pointer value) args))
+  (call-boolean-method-a boolean ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-byte-method byte ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-byte-method-v
-  (call-byte-method-a byte ((object object) (method-id method-id) ((:pointer value) args))
+  (call-byte-method-a byte ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-char-method char ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-char-method-v
-  (call-char-method-a char ((object object) (method-id method-id) ((:pointer value) args))
+  (call-char-method-a char ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-short-method short ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-short-method-v
-  (call-short-method-a short ((object object) (method-id method-id) ((:pointer value) args))
+  (call-short-method-a short ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-int-method int ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-int-method-v
-  (call-int-method-a int ((object object) (method-id method-id) ((:pointer value) args))
+  (call-int-method-a int ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-long-method long ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-long-method-v
-  (call-long-method-a long ((object object) (method-id method-id) ((:pointer value) args))
+  (call-long-method-a long ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-float-method float ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-float-method-v
-  (call-float-method-a float ((object object) (method-id method-id) ((:pointer value) args))
+  (call-float-method-a float ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-double-method double ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-double-method-v
-  (call-double-method-a double ((object object) (method-id method-id) ((:pointer value) args))
+  (call-double-method-a double ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-void-method :void ((object object) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-void-method-v
-  (call-void-method-a :void ((object object) (method-id method-id) ((:pointer value) args))
+  (call-void-method-a :void ((object object) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
 
   (call-nonvirtual-object-method object ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-object-method-v
-  (call-nonvirtual-object-method-a object ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-object-method-a object ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-boolean-method boolean ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-boolean-method-v
-  (call-nonvirtual-boolean-method-a boolean ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-boolean-method-a boolean ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-byte-method byte ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-byte-method-v
-  (call-nonvirtual-byte-method-a byte ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-byte-method-a byte ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-char-method char ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-char-method-v
-  (call-nonvirtual-char-method-a char ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-char-method-a char ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-short-method short ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-short-method-v
-  (call-nonvirtual-short-method-a short ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-short-method-a short ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-int-method int ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-int-method-v
-  (call-nonvirtual-int-method-a int ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-int-method-a int ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-long-method long ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-long-method-v
-  (call-nonvirtual-long-method-a long ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-long-method-a long ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-float-method float ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-float-method-v
-  (call-nonvirtual-float-method-a float ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-float-method-a float ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-double-method double ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-double-method-v
-  (call-nonvirtual-double-method-a double ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-double-method-a double ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
   (call-nonvirtual-void-method :void ((object object) (class class) (method-id method-id) (&rest args))
     "Returns the result of calling the Java method.")
   %call-nonvirtual-void-method-v
-  (call-nonvirtual-void-method-a :void ((object object) (class class) (method-id method-id) ((:pointer value) args))
+  (call-nonvirtual-void-method-a :void ((object object) (class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the Java method.")
 
   (get-field-id field-id ((class class) (:string name) (:string signature))
@@ -362,52 +361,52 @@ Causes an uninitialized class to be initialized.")
   (call-static-object-method object ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-object-method-v
-  (call-static-object-method-a object ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-object-method-a object ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-boolean-method boolean ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-boolean-method-v
-  (call-static-boolean-method-a boolean ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-boolean-method-a boolean ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-byte-method byte ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-byte-method-v
-  (call-static-byte-method-a byte ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-byte-method-a byte ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-char-method char ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-char-method-v
-  (call-static-char-method-a char ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-char-method-a char ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-short-method short ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-short-method-v
-  (call-static-short-method-a short ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-short-method-a short ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-int-method int ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-int-method-v
-  (call-static-int-method-a int ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-int-method-a int ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-long-method long ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-long-method-v
-  (call-static-long-method-a long ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-long-method-a long ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-float-method float ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-float-method-v
-  (call-static-float-method-a float ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-float-method-a float ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-double-method double ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-double-method-v
-  (call-static-double-method-a double ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-double-method-a double ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
   (call-static-void-method :void ((class class) (method-id method-id) (&rest args))
     "Returns the result of calling the static Java method.")
   %call-static-void-method-v
-  (call-static-void-method-a :void ((class class) (method-id method-id) ((:pointer value) args))
+  (call-static-void-method-a :void ((class class) (method-id method-id) ((:pointer (:union value)) args))
     "Returns the result of calling the static Java method.")
 
   (get-static-field-id field-id ((class class) (:string name) (:string signature))
@@ -474,7 +473,7 @@ Returns NULL if the string cannot be constructed.")
   (get-string-utf-chars (:pointer :char) ((string string) ((:return boolean) is-copy))
     "Returns a pointer to a modified UTF-8 string, or NULL if the operation fails.
 Returns a second value which indicates whether a copy is made (boolean*)")
-  (release-string-utf-chars :void ((string java-string)) (((:pointer :char) string))
+  (release-string-utf-chars :void ((string java-string) ((:pointer :char) string))
     "Informs the VM that the native code no longer needs access to the string.
 The string argument is a pointer derived from string using get-string-utf-chars.")
 
@@ -487,7 +486,7 @@ All elements are initially set to initial-element.
 Returns NULL if the array cannot be constructed.")
   (get-object-array-element object ((object-array array) (size index))
     "Returns an element of an object array.")
-  (set-object-array-element :void ((object-array) (size index) (object value))
+  (set-object-array-element :void ((object-array array) (size index) (object value))
     "Sets an element of an object array.")
 
   (new-boolean-array boolean-array ((size length))
@@ -660,9 +659,9 @@ To avoid deadlocks, a monitor entered through a monitor-enter
   (get-string-utf-region :void ((string string) (size start) (size length) ((:pointer :char) buffer))
     "Translates region of Unicode characters into modified UTF-8 encoding and copies it to the given buffer.")
 
-  (get-primitive-array-critical (:pointer value) ((array array) ((:return boolean) is-copy))
+  (get-primitive-array-critical :pointer ((array array) ((:return boolean) is-copy))
     "See jni spec.")
-  (release-primitive-array-critical :void ((array array) ((:pointer value) buffer) (mode mode))
+  (release-primitive-array-critical :void ((array array) (:pointer buffer) (mode mode))
     "See jni spec.")
 
   (get-string-critical (:pointer char) ((string string) ((:return boolean) is-copy))
