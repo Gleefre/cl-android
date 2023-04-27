@@ -473,7 +473,7 @@ Returns NULL if the string cannot be constructed.")
   (get-string-utf-chars (:pointer :char) ((string string) ((:return boolean) is-copy))
     "Returns a pointer to a modified UTF-8 string, or NULL if the operation fails.
 Returns a second value which indicates whether a copy is made (boolean*)")
-  (release-string-utf-chars :void ((string java-string) ((:pointer :char) string))
+  (release-string-utf-chars :void ((string java-string) ((:pointer :char) char-array))
     "Informs the VM that the native code no longer needs access to the string.
 The string argument is a pointer derived from string using get-string-utf-chars.")
 
@@ -651,7 +651,7 @@ To avoid deadlocks, a monitor entered through a monitor-enter
   (monitor-exit code ((object object))
     "The current thread must be the owner of the monitor associated with the underlying Java object")
 
-  (get-java-vm code ((:return vm))
+  (get-vm code ((:return vm))
     "Returns the Java VM interface as a second value.")
 
   (get-string-region :void ((string string) (size start) (size length) ((:pointer char) buffer))

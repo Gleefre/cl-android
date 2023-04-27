@@ -49,8 +49,8 @@
   (:use #:cl #:cffi)
   (:local-nicknames (#:jll #:cl-android/jni/cffi))  ; jll = jni low level
   (:export #:init
-           #:get-created-java-vms
-           #:destroy-java-vm
+           #:get-created-vms
+           #:destroy-vm
            #:attach-current-thread
            #:detach-current-thread
            #:get-environment))
