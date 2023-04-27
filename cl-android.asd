@@ -9,5 +9,6 @@
                (:file "pid-uid")
                (:file "api-levels")
                (:file "permissions")
+               (:file "native-helper-define-interface-function-table")
                (:file "native-helper-cffi")
                (:file "native-helper")))
